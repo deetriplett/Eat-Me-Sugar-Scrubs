@@ -37,29 +37,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $mail->Subject = 'Order' . $name;
     $mail->Body    = $email_body;
 
-    if(!$mail->send()) {
+    if($mail->send()) {
+      header("Location:order.php?status=thanks"); //redirect to another php file
+      exit;
+    }
         $error_message = 'Message could not be sent.';
         $error_message .= 'Mailer Error: ' . $mail->ErrorInfo;
-    }
-    header("Location:order.php?status=thanks"); //redirect to another php file
-
-}//End Conditional
+    }//End Conditional
 
 
 $pageTitle = "Order";
 $section = "order";
 
-include("inc/header.php"); ?>
+include("inc/header.php");
+?>
 
 <div class="section page">
   <div class="wrapper">
     <h1>Order</h1>
-    <?php
-    if(isset($_GET["status"] && $_GET["status"] == "thanks"){
-      echo "<p>Thanks for the order: I &rsquo;ll check out your orderYou will receive an email shortly!</p>"
-} else {
-  <p>If you think there is something I&rsquo;m missing, let me know! Complete the form to send me an email.</p>
-    ?>
+    <?php if (isset($_GET["status"]) && $_GET["status"] == "thanks") {
+      echo "<p>Thanks for the order: I &rsquo;ll check out your order. You will receive an email shortly!</p>";
+  }
+       else {
+  if (isset($error_message)) {
+    echo "<p class='message'>".$error_message . "</p>";
+  } else {
+    echo "<p>Indulge Your Sweet Tooth!</p>";
+  }
+?>
 
 <!--ORDER FORM-->
     <form method="post" action="order.php">
