@@ -29,27 +29,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $email_body .= "Address: " . $address. "\n";
     $email_body .= "Order Details:\n";
     $email_body .= $cart;
-
-    // .= tells code to keep everything in the variable and add the following info to the end of that value
-
+  // .= tells code to keep everything in the variable and add the following info to the end of that value
 
     $mail->setFrom($email, $name);
-    $mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-    $mail->addAddress('ellen@example.com');               // Name is optional
-
-    $mail->isHTML(false);                                  // Set email format to HTML
-
+    $mail->addAddress('eatmesugar@gmail.com', 'Dawn Monroe');// Add a recipient
+    $mail->isHTML(false);// Set email format to HTML
     $mail->Subject = 'Order' . $name;
     $mail->Body    = $email_body;
 
     if(!$mail->send()) {
-        echo 'Message could not be sent.';
-        echo 'Mailer Error: ' . $mail->ErrorInfo;
-        exit;
+        $error_message = 'Message could not be sent.';
+        $error_message .= 'Mailer Error: ' . $mail->ErrorInfo;
     }
+    header("Location:order.php?status=thanks"); //redirect to another php file
+
 }//End Conditional
 
-header("Location:order.php?status=thanks"); //redirect to another php file
 
 $pageTitle = "Order";
 $section = "order";
