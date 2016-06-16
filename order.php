@@ -10,14 +10,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
   }
 //Fake Form Input to catch Spammers/Bots
-  if ($_POST["phone"] != ""){
+  if (!isset($error_message) && $_POST["phone"] != "") {
     $error_message =  "Bad Form Input!";
-
   }
 // if email addy not valid display error and stop execution & (nb. => related to arrays and their keys; -> objects and their properties)
   require("inc/phpmailer/class.phpmailer.php");
   $mail = new PHPMailer;
-  if(!$mail->ValidateAddress($email)){
+
+  if(!isset($error_message) && !$mail->ValidateAddress($email)) {
     $error_message = "Error. Invalid Email Address.";
   }
   //Conditional, Email only executes when there are no errors
