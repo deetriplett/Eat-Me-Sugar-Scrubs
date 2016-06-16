@@ -71,11 +71,13 @@ include("inc/header.php");
       <table>
         <tr>
           <th><label for="name">Name</label></th>
-          <td> <input type="text" id="name" name="name"/></td>
+          <td> <input type="text" id="name" name="name" value="<?php if(isset($name)) {
+            echo $name; }?>"/></td>
         </tr>
         <tr>
           <th><label for="email">Email</label></th>
-          <td> <input type="text" id="email" name="email"/></td>
+          <td> <input type="text" id="email" name="email" value="<?php if(isset($email)) {
+            echo $email; }?>/></td>
         </tr>
         <tr>
           <th><label for="address">Address</label></th>
