@@ -1,0 +1,12 @@
+{
+    "name": "deetr_000/deetr_000",
+    "authors": [
+        {
+            "name": "Dawn Monroe",
+            "email": "codedawncode@gmail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^1.20"
+    }
+}
